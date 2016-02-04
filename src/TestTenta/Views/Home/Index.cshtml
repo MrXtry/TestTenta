@@ -1,0 +1,26 @@
+﻿@model ListArtistsViewModel[]
+
+@foreach (var artist in Model)
+{
+    <p onmouseover="getPartial(@artist.Id)">
+        <a href="artists/edit/@artist.Id">@artist.Name</a>
+        @if (artist.Revenue >= 1000000)
+        {
+            <b>BestSeller</b>
+        }
+    </p>
+}
+<div id="divResult"></div>
+
+<script src="~/Scripts/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function getPartial(id) {
+        $.get("/home/PartialView",
+            { id: id },
+            function (html) {
+                $("#divResult").html(html);
+
+            });
+
+    }
+</script>
